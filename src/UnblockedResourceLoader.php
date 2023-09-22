@@ -1,5 +1,7 @@
 <?php
 
+namespace UnblockedResourceLoader;
+
 class UnblockedResourceLoader
 {
     private function read_file($file)

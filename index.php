@@ -1,6 +1,6 @@
 <?php
 
-require_once 'UnblockedResourceLoader.php';
+require 'vendor/autoload.php';
 
-$loader = new UnblockedResourceLoader();
+$loader = new UnblockedResourceLoader\UnblockedResourceLoader();
 $loader->execute();
