@@ -13,8 +13,16 @@
   },
   "authors": [
     {
-      "name": "Votre nom",
-      "email": "votre.email@example.com"
+      "name": "NORMAND Alexandre",
+      "email": "alexandre.n@lexprod.net"
     }
-  ]
+  ],
+  "scripts": {
+    "post-install-cmd": [
+      "LexProdSAS\\UnblockedResourceLoader\\Installer::postInstall"
+    ],
+    "post-update-cmd": [
+      "LexProdSAS\\UnblockedResourceLoader\\Installer::postUpdate"
+    ]
+  }
 }
