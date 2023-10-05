@@ -1,6 +1,7 @@
 {
   "name": "lexprodsas/unblocked-resource-loader",
   "description": "A PHP-based tool for seamless loading of images and links, improving user experience by addressing limitations of ad blockers.",
+  "version": "0.2.0",
   "license": "MIT",
   "type": "library",
   "require": {
