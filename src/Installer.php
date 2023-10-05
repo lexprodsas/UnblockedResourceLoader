@@ -1,6 +1,6 @@
 <?php
 
-namespace LexProdSAS\UnblockedResourceLoader;
+namespace UnblockedResourceLoader;
 
 use Composer\Script\Event;
 
@@ -20,20 +20,35 @@ class Installer
     {
         $extras = $event->getComposer()->getPackage()->getExtra();
 
-        // Check that 'public-dir' is defined in the 'extra' section of the project's composer.json file.
         if (isset($extras['public-dir'])) {
             $publicDir = $extras['public-dir'];
+            $vendorDir = __DIR__;
 
-            $vendorDir = __DIR__;  // The path to the folder where this script is located
+            // Debug: Afficher les chemins utilisés
+            echo "Vendor Dir: $vendorDir\n";
+            echo "Public Dir: $publicDir\n";
 
-            // Delete the symbolic link if it already exists
             if (is_link("$publicDir/unblocked-resource-loader")) {
+                // Debug: Message si le lien existe déjà
+                echo "Link already exists. Removing...\n";
                 unlink("$publicDir/unblocked-resource-loader");
             }
 
-            // Create a new symbolic link
+            // Debug: Message avant la création du lien symbolique
+            echo "Creating symlink...\n";
             symlink($vendorDir, "$publicDir/unblocked-resource-loader");
+
+            // Debug: Vérifier si le lien symbolique a été créé
+            if (is_link("$publicDir/unblocked-resource-loader")) {
+                echo "Symlink created successfully.\n";
+            } else {
+                echo "Failed to create symlink.\n";
+            }
+        } else {
+            // Debug: Message si 'public-dir' n'est pas défini
+            echo "'public-dir' is not set in composer.json extra.\n";
         }
     }
+
 
 }

@@ -20,10 +20,10 @@
   ],
   "scripts": {
     "post-install-cmd": [
-      "LexProdSAS\\UnblockedResourceLoader\\Installer::postInstall"
+      "UnblockedResourceLoader\\Installer::postInstall"
     ],
     "post-update-cmd": [
-      "LexProdSAS\\UnblockedResourceLoader\\Installer::postUpdate"
+      "UnblockedResourceLoader\\Installer::postUpdate"
     ]
   }
 }
