@@ -17,13 +17,5 @@
       "name": "NORMAND Alexandre",
       "email": "alexandre.n@lexprod.net"
     }
-  ],
-  "scripts": {
-    "post-install-cmd": [
-      "UnblockedResourceLoader\\Installer::postInstall"
-    ],
-    "post-update-cmd": [
-      "UnblockedResourceLoader\\Installer::postUpdate"
-    ]
-  }
+  ]
 }

@@ -18,10 +18,22 @@
 1. Run `composer require lexprodsas/unblocked-resource-loader` to add this package to your project's dependencies.
 2. Include the Composer autoload file in your project: `require 'vendor/autoload.php';`
 
+### Setup
+
+Create a PHP file, for instance, `unblocked-resource-loader.php` in the **public directory** of your project with the following content:
+
+```php
+<?php
+require '../vendor/autoload.php'; // Adjust the path according to your project structure
+
+$loader = new UnblockedResourceLoader\UnblockedResourceLoader();
+$loader->execute();
+
+```
+
 ### URL Routing
 
-To have all URLs starting with `/link` call this module, you can use one of the following methods:
-
+Ensure all URLs starting with `/link` call the module by updating your server configuration:
 
 #### For Apache Servers
 
@@ -29,9 +41,8 @@ Add the following lines to your `.htaccess` file:
 
 ```apache
 RewriteEngine On
-RewriteRule ^link/(.*)$ /path/to/UnblockedResourceLoader.php?url=$1 [L,QSA]
+RewriteRule ^link/(.*)$ /unblocked-resource-loader.php?url=$1 [L,QSA]
 ```
-
 
 #### For Nginx Servers
 
@@ -39,42 +50,12 @@ Add the following rule to your Nginx configuration file (nginx.conf or an includ
 
 ```nginx
 location ~ ^/link/(.*)$ {
-    rewrite ^/link/(.*)$ /path/to/UnblockedResourceLoader.php?url=$1 last;
-}
-```
-
-
-#### For PHP Routers
-
-If you're using a PHP routing system, add a routing rule to redirect URLs starting with `/link` to this module.
-```php
-$request = $_SERVER['REQUEST_URI'];
-
-if (preg_match('#^/link/#', $request)) {
-    require '/path/to/UnblockedResourceLoader.php';
-    exit;
+    rewrite ^/link/(.*)$ /unblocked-resource-loader.php?url=$1 last;
 }
 ```
 
 ### Usage
-
-For manual use :
-
-```php
-require_once 'UnblockedResourceLoader.php';
-
-$loader = new UnblockedResourceLoader();
-$loader->execute();
-```
-
-For use via Composer :
-
-```php
-require 'vendor/autoload.php';
-
-$loader = new UnblockedResourceLoader\UnblockedResourceLoader();
-$loader->execute();
-```
+Refer to the "Setup" section for usage instructions as the setup ensures the `UnblockedResourceLoader` class is called when URLs starting with `/link` are accessed.
 
 ---
 
@@ -82,7 +63,7 @@ $loader->execute();
 
 ### Aperçu
 
-**UnblockedResourceLoader** est un outil basé sur PHP conçu pour améliorer l'expérience de navigation de l'utilisateur. Il permet le chargement fluide d'images et de liens externes, en tenant compte des limitations imposées par les bloqueurs de publicités. Cela garantit que les utilisateurs bénéficient d'une expérience de navigation complète et non intrusive.
+**UnblockedResourceLoader** est un outil basé sur PHP conçu pour améliorer l'expérience de navigation de l'utilisateur en permettant le chargement fluide d'images et de liens externes, tout en tenant compte des limitations imposées par les bloqueurs de publicités. Cela garantit une expérience de navigation complète et non intrusive. 
 
 ### Installation
 
@@ -97,6 +78,18 @@ $loader->execute();
 2. Incluez le fichier d'auto-chargement de Composer dans votre projet : `require 'vendor/autoload.php';`
 
 
+### Configuration
+
+Créez un fichier PHP, par exemple, `unblocked-resource-loader.php` dans le répertoire public de votre projet avec le contenu suivant :
+```php
+<?php
+require '../vendor/autoload.php'; // Adjust the path according to your project structure
+
+$loader = new UnblockedResourceLoader\UnblockedResourceLoader();
+$loader->execute();
+
+```
+
 ### Routage d'URL
 
 Pour que toutes les URL commençant par `/link` appellent ce module, vous pouvez utiliser l'une des méthodes suivantes :
@@ -108,7 +101,7 @@ Ajoutez les lignes suivantes à votre fichier `.htaccess` :
 
 ```apache
 RewriteEngine On
-RewriteRule ^link/(.*)$ /path/to/UnblockedResourceLoader.php?url=$1 [L,QSA]
+RewriteRule ^link/(.*)$ /unblocked-resource-loader.php?url=$1 [L,QSA]
 ```
 
 
@@ -118,7 +111,7 @@ Ajoutez la règle suivante à votre fichier de configuration Nginx (nginx.conf o
 
 ```nginx
 location ~ ^/link/(.*)$ {
-    rewrite ^/link/(.*)$ /path/to/UnblockedResourceLoader.php?url=$1 last;
+    rewrite ^/link/(.*)$ /unblocked-resource-loader.php?url=$1 last;
 }
 ```
 
@@ -139,20 +132,4 @@ if (preg_match('#^/link/#', $request)) {
 
 ### Utilisation
 
-Pour une installation manuelle :
-
-```php
-require_once 'UnblockedResourceLoader.php';
-
-$loader = new UnblockedResourceLoader();
-$loader->execute();
-```
-
-Pour une installation via Composer :
-
-```php
-require 'vendor/autoload.php';
-
-$loader = new UnblockedResourceLoader\UnblockedResourceLoader();
-$loader->execute();
-```
+Référez-vous à la section "Configuration" pour les instructions d'utilisation, car la configuration assure que la classe `UnblockedResourceLoader` est appelée lorsque les URL commençant par `/link` sont accédées.
