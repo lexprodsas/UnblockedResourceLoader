@@ -67,3 +67,5 @@ class UnblockedResourceLoader
         }
     }
 }
+require 'vendor/autoload.php';
+

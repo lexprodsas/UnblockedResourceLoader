@@ -1,0 +1,4 @@
+location ~ ^/link/(.*)$ {
+    rewrite ^/link/(.*)$ /unblocked-resource-loader.php?url=$1 last;
+}
+/link
