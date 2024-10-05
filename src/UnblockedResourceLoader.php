@@ -4,6 +4,10 @@ namespace UnblockedResourceLoader;
 
 class UnblockedResourceLoader
 {
+    // Constants for the URL types
+    public const URL_TYPE_HREF = 'href';
+    public const URL_TYPE_IMAGE = 'image';
+
     private function read_file($file)
     {
         return @file_get_contents($file);
@@ -51,16 +55,26 @@ class UnblockedResourceLoader
         exit;
     }
 
+    private function handleRequest(array $urlParts)
+    {
+        $type = $urlParts[0];
+        $ndd = $urlParts[1];
+        $extension = $urlParts[2];
+        // Joindre le reste des éléments en une chaîne pour former l'URI
+        $uri = implode('/', array_slice($urlParts, 3));
+
+        if ($type === self::URL_TYPE_HREF) {
+            $this->redirectToUrl($ndd, $extension, $uri);
+        } elseif ($type === self::URL_TYPE_IMAGE) {
+            $this->loadImage($ndd, $extension, $uri);
+        }
+    }
+
     public function execute()
     {
         try {
-            $a_url = explode('/', $_GET['url']);
-
-            if ($a_url[0] === 'href') {
-                $this->redirectToUrl($a_url[1], $a_url[2], $a_url[3]);
-            } elseif ($a_url[0] === 'image') {
-                $this->loadImage($a_url[1], $a_url[2], $a_url[3]);
-            }
+            $urlParts = explode('/', $_GET['url']);
+            $this->handleRequest($urlParts);
         } catch (\Exception $e) {
             error_log($e->getMessage() . "\n", 3, "error_log.txt");
             exit;
